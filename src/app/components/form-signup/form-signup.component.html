@@ -1,0 +1,39 @@
+<div class="form-content">
+    <form [formGroup]="formSignUp" class="form-signin" (submit)="onSubmit()">
+        <div class="title-form">
+            <h1>Faça o seu Cadastro!</h1>
+            <span>Preencha as informações abaixo</span>
+        </div>
+        <label for="name"
+            [ngClass]="{'has-value': formSignUp.get('name')?.value}">
+            <span>Nome:</span>
+            <input type="name" id="name" formControlName="name">
+        </label>
+        <label for="email"
+            [ngClass]="{'has-value': formSignUp.get('email')?.value}">
+            <span>Email:</span>
+            <input type="email" id="email" formControlName="email">
+        </label>
+        <label for="password"
+            [ngClass]="{'has-value': formSignUp.get('password')?.value}">
+            <span>Senha:</span>
+            <input type="password" name="password" id="password"
+                formControlName="password">
+        </label>
+        <label for="confirmPassword"
+            [ngClass]="{'has-value': formSignUp.get('confirmPassword')?.value}">
+            <span>Confirmar Senha:</span>
+            <input type="password" name="confirmPassword" id="confirmPassword"
+                formControlName="confirmPassword">
+        </label>
+        <div class="btn-content">
+
+            <button class="btn-login">
+                <span *ngIf="isLoading" class="spinner"></span>
+                <span *ngIf="!isLoading">Criar Conta</span>
+            </button>
+
+        </div>
+
+    </form>
+</div>

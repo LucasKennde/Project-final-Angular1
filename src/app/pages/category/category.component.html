@@ -1,0 +1,28 @@
+<div class="header-category">
+    <h1>{{category.name}}</h1>
+    <button (click)="toggleModal()">Adicionar Novo Jogo</button>
+</div>
+<div class="grid-games">
+
+    <div class="card-game" *ngFor="let gameCard of games">
+        <img [src]="gameCard.image" alt>
+
+        <div class="card-information">
+            <div>
+                <h1>{{gameCard.name}}</h1>
+                <p>{{gameCard.price.toFixed(2)}}</p>
+            </div>
+            <a
+                [routerLink]="['/games/', gameCard.id]">Saiba mais
+
+            </a>
+        </div>
+
+    </div>
+</div>
+<div class="modal" *ngIf="modal">
+    <div class="header-modal">
+        <span (click)="toggleModal()">Close ❌</span>
+    </div>
+    <app-form-add-game />
+</div>

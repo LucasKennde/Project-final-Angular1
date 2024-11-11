@@ -1,0 +1,6 @@
+<div class="grid-categories">
+    <div class="card-category" *ngFor="let itemCategory of categories">
+        <a
+            [routerLink]="['/categories/', itemCategory.id]">{{itemCategory.name}}</a>
+    </div>
+</div>

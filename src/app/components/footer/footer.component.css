@@ -1,0 +1,26 @@
+footer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1440px;
+    margin: 0 auto;
+    border-radius: 20px;
+    border: 3px solid #B10DA7;
+    border-bottom: none;
+
+    h1 {
+        font-family: Poppins;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 36px;
+        text-align: center;
+        color: #BB16C8
+    }
+
+    strong {
+        color: #3CAEE4;
+        ;
+    }
+}

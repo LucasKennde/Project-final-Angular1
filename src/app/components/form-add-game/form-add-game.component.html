@@ -1,0 +1,45 @@
+<div class="form-content">
+    <form (submit)="onSubmit()">
+        <div class="image-content">
+            <img *ngIf="image" src="{{image}}" alt>
+        </div>
+        <label for="name">
+            <span>Nome:</span>
+            <input type="text" name="name" id="name" [(ngModel)]="name">
+        </label>
+        <label for="title">
+            <span>Título:</span>
+            <input type="text" name="title" id="title" [(ngModel)]="title">
+        </label>
+        <label for="description">
+            <span>Descrição:</span>
+            <input type="text" name="description" id="description"
+                [(ngModel)]="description">
+        </label>
+        <label for="image">
+            <span>URL Image:</span>
+            <input type="text" name="image" id="image" [(ngModel)]="image">
+        </label>
+        <label for="categories">
+            <span>Categorias:</span>
+            <select name="categories" id="categories"
+                [(ngModel)]="categories">
+                <option *ngFor="let category of categories"
+                    value="{{category.id}}">{{category.name}}
+                </option>
+            </select>
+
+        </label>
+        <label for="price">
+            <span>Preço:</span>
+            <input type="text" name="price" id="price"
+                [(ngModel)]="price">
+        </label>
+        <label for="stock">
+            <span>Em estoque:</span>
+            <input type="text" name="stock" id="stock"
+                [(ngModel)]="stock">
+        </label>
+        <button>Salvar</button>
+    </form>
+</div>

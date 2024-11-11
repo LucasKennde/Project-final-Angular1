@@ -1,0 +1,22 @@
+<div class="main-game">
+
+    <div class="game-content">
+        <div class="image-content">
+            <img src="{{game.image}}" alt="{{game.title}}">
+        </div>
+        <div class="description-content">
+            <div class="text-game">
+                <h1>{{game.name}}</h1>
+                <h2>Título: {{game.title}}</h2>
+                <p>Descrição: {{game.description}}</p>
+                <p>Categoria: {{game.category?.name}}</p>
+                <p>Preço: R$ {{game.price?.toFixed(2)}}</p>
+                <p>Em estoque: {{game.stock}}</p>
+            </div>
+            <div class="buttons">
+                <button>Editar</button>
+                <button>Excluir</button>
+            </div>
+        </div>
+    </div>
+</div>
