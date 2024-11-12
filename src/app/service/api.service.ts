@@ -17,7 +17,7 @@ export class ApiService {
   }
 
   getData(key: string) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const data = localStorage.getItem(key);
       return data ? JSON.parse(data) : false;
     } else {
@@ -26,7 +26,7 @@ export class ApiService {
     }
   }
   postData(key: string, object: any) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.setItem(key, JSON.stringify(object));
     } else {
       console.warn('localStorage não está disponível.');
@@ -34,7 +34,7 @@ export class ApiService {
   }
 
   postUsers(key: string, object: any) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const users = this.getData(key) || [];
       users.push(object);
       localStorage.setItem(key, JSON.stringify(users));
@@ -43,7 +43,7 @@ export class ApiService {
     }
   }
   postLoginUsers(key: string, object: any) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const { email, password } = object
       const users: Array<{ email: string, password: string }> = this.getData(key)
       const user = users.find(element => element.email === email && element.password === password)
@@ -55,7 +55,7 @@ export class ApiService {
     }
   }
   instalDB() {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.setItem('categories', JSON.stringify(categories))
       localStorage.setItem('games', JSON.stringify(games))
     } else {
@@ -64,7 +64,7 @@ export class ApiService {
   }
 
   searchGamesByCategoryId(categoryId: number) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const boardGames = this.getData('games')
       if (!boardGames) {
         console.error('No games data found');
@@ -77,7 +77,7 @@ export class ApiService {
     }
   }
   findGameByGameId(gameId: number) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const boardGames = this.getData('games')
       if (!boardGames) {
         console.error('No games data found');
@@ -90,7 +90,7 @@ export class ApiService {
     }
   }
   searchCategoryById(id: number) {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const data = this.getData('categories')
       const category = data.find((category: ICategory) => category.id == id)
       return category
@@ -102,7 +102,7 @@ export class ApiService {
     return this.isLocalStorageAvailable() && !!localStorage.getItem('logado');
   }
   logout() {
-    if (this.isLocalStorageAvailable()) {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       localStorage.removeItem('logado')
     } else {
       console.warn('localStorage não está disponível.');
