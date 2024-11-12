@@ -14,9 +14,26 @@
                 <p>Em estoque: {{game.stock}}</p>
             </div>
             <div class="buttons">
-                <button>Editar</button>
-                <button>Excluir</button>
+                <button (click)="toggleModal2()">Editar</button>
+                <button (click)="toggleModal()">Excluir</button>
             </div>
         </div>
+    </div>
+    <div class="modal-excluir" *ngIf="modal">
+
+        <div class="modal-content">
+            <h1>Você realmente deseja excluir esse jogo?</h1>
+            <div class="btn-modal">
+                <button (click)="deleteProduct(gameId)"
+                    class="btn-blue">SIM</button>
+                <button (click)="toggleModal()" class="btn-red">NÃO</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal2" *ngIf="modal2">
+        <div class="header-modal">
+            <span (click)="toggleModal2()">Close ❌</span>
+        </div>
+        <app-form-edit-game />
     </div>
 </div>

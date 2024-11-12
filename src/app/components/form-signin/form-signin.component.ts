@@ -22,22 +22,20 @@ export class FormSigninComponent {
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     })
+
   }
 
   onSubmit() {
     console.log(this.formSignIn.value);
     this.isLoading = true
-    try {
-      const login = this.ApiService.postLoginUsers('users', this.formSignIn.value)
-      if (login) {
-        this.router.navigate(['/categories'])
-      } else {
-        alert('Email ou senha incorretos')
-      }
-    } catch (err) {
-      console.log(err);
-      this.isLoading = false
+    const login = this.ApiService.postLoginUsers('users', this.formSignIn.value)
+    if (login) {
+      this.router.navigate(['/categories'])
+      this.ApiService.postData('logado', this.formSignIn.value)
+    } else {
+      alert('Email ou senha incorretos')
     }
+
     this.isLoading = false
   }
 }

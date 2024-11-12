@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import categories from '../utils/categories'
 import games from '../utils/games';
 import { IGame } from '../interfaces/IGame';
+import { ICategory } from '../interfaces/ICategory';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,56 +12,93 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  isLocalStorageAvailable(): boolean {
+    return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+  }
+
   getData(key: string) {
-    // return this.http.get(`${this.apiUrl}/${endpoint}`);
-    const data = localStorage.getItem(key);
-    return data ? JSON.parse(data) : [];
+    if (this.isLocalStorageAvailable()) {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : [];
+    } else {
+      console.warn('localStorage não está disponível.');
+      return [];
+    }
   }
   postData(key: string, object: any) {
-    // return this.http.post(`${this.apiUrl}/${endpoint}`, data);
-    const data = localStorage.setItem(`${key}`, JSON.stringify(object))
-
-    return data
+    if (this.isLocalStorageAvailable()) {
+      localStorage.setItem(key, JSON.stringify(object));
+    } else {
+      console.warn('localStorage não está disponível.');
+    }
   }
+
   postUsers(key: string, object: any) {
-    const users = this.getData(key)
-    users.push(object)
-    const data = localStorage.setItem(`${key}`, JSON.stringify(users))
-    return data
+    if (this.isLocalStorageAvailable()) {
+      const users = this.getData(key);
+      users.push(object);
+      localStorage.setItem(key, JSON.stringify(users));
+    } else {
+      console.warn('localStorage não está disponível.');
+    }
   }
   postLoginUsers(key: string, object: any) {
-    const { email, password } = object
-    const users: Array<{ email: string, password: string }> = this.getData(key)
-    const user = users.find(element => element.email === email && element.password === password)
-    return user ? true : false
+    if (this.isLocalStorageAvailable()) {
+      const { email, password } = object
+      const users: Array<{ email: string, password: string }> = this.getData(key)
+      const user = users.find(element => element.email === email && element.password === password)
+      return user ? true : false
+    } else {
+      console.warn('localStorage não está disponível.');
+      return false
+
+    }
   }
   instalDB() {
-    localStorage.setItem('categories', JSON.stringify(categories))
-    localStorage.setItem('games', JSON.stringify(games))
+    if (this.isLocalStorageAvailable()) {
+      localStorage.setItem('categories', JSON.stringify(categories))
+      localStorage.setItem('games', JSON.stringify(games))
+    } else {
+      console.warn('localStorage não está disponível.');
+    }
   }
 
   searchGamesByCategoryId(categoryId: number) {
-    const boardGames = this.getData('games')
-    if (!boardGames) {
-      console.error('No games data found');
-      return [];
+    if (this.isLocalStorageAvailable()) {
+      const boardGames = this.getData('games')
+      if (!boardGames) {
+        console.error('No games data found');
+        return [];
+      }
+      const filterGamesByCategory = boardGames.filter((game: IGame) => game.category.id == categoryId);
+      return filterGamesByCategory;
+    } else {
+      console.warn('localStorage não está disponível.');
     }
-    const filterGamesByCategory = boardGames.filter((game: IGame) => game.category.id == categoryId);
-    console.log(filterGamesByCategory);
-    return filterGamesByCategory;
   }
   findGameByGameId(gameId: number) {
-    const boardGames = this.getData('games')
-    if (!boardGames) {
-      console.error('No games data found');
-      return [];
+    if (this.isLocalStorageAvailable()) {
+      const boardGames = this.getData('games')
+      if (!boardGames) {
+        console.error('No games data found');
+        return [];
+      }
+      const findGameById = boardGames.find((game: IGame) => game.id == gameId)
+      return findGameById
+    } else {
+      console.warn('localStorage não está disponível.');
     }
-    const findGameById = boardGames.find((game: IGame) => game.id == gameId)
-    return findGameById
   }
   searchCategoryById(id: number) {
-    const data = this.getData('categories')
-    const category = data.find((category: any) => category.id == id)
-    return category
+    if (this.isLocalStorageAvailable()) {
+      const data = this.getData('categories')
+      const category = data.find((category: ICategory) => category.id == id)
+      return category
+    } else {
+      console.warn('localStorage não está disponível.');
+    }
+  }
+  isLoggedIn(): boolean {
+    return this.isLocalStorageAvailable() && !!localStorage.getItem('logado');
   }
 }

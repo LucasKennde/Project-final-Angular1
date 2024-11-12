@@ -8,7 +8,7 @@ import { ModalServiceService } from '../../service/Modal/modal-service.service';
 @Component({
   selector: 'app-form-add-game',
   standalone: true,
-  imports: [NgFor, NgIf, FormsModule,],
+  imports: [NgFor, NgIf, FormsModule],
   templateUrl: './form-add-game.component.html',
   styleUrl: './form-add-game.component.css'
 })

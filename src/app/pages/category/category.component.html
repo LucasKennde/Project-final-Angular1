@@ -13,7 +13,8 @@
                 <p>{{gameCard.price.toFixed(2)}}</p>
             </div>
             <a
-                [routerLink]="['/games/', gameCard.id]">Saiba mais
+                [routerLink]="['/category/',gameCard.category.id, gameCard.id]">Saiba
+                mais
 
             </a>
         </div>

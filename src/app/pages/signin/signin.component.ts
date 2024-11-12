@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormSigninComponent } from "../../components/form-signin/form-signin.component";
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../service/api.service';
 
 @Component({
@@ -13,7 +13,18 @@ import { ApiService } from '../../service/api.service';
 export class SigninComponent {
   ApiService = inject(ApiService)
 
+  constructor(private router: Router) { }
   ngOnInit() {
-    this.ApiService.instalDB()
+    const data = this.ApiService.getData('games')
+    if (!data) {
+
+      this.ApiService.instalDB()
+    } else {
+      const logado = this.ApiService.getData('logado')
+      if (logado) {
+        this.router.navigate(['/categories'])
+      }
+    }
+
   }
 }
