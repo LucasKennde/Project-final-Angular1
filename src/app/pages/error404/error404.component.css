@@ -1,0 +1,30 @@
+.content {
+    display: flex;
+    width: 1440px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    gap: 1rem;
+
+    a {
+        text-decoration: none;
+        font-family: poppins;
+        color: #f9f9f9;
+        font-size: 2rem;
+        padding: 1rem;
+        border: 3px solid #f9f9f9;
+        border-radius: 20px;
+
+        &:hover {
+            background-color: #f9f9f9;
+            color: #7B0B7C;
+        }
+    }
+
+    h1 {
+        font-family: poppins;
+        color: #f9f9f9;
+        font-size: 3rem;
+    }
+}

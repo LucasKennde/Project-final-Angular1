@@ -17,7 +17,6 @@ export class SigninComponent {
   ngOnInit() {
     const data = this.ApiService.getData('games')
     if (!data) {
-
       this.ApiService.instalDB()
     } else {
       const logado = this.ApiService.getData('logado')

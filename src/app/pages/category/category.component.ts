@@ -1,6 +1,6 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ApiService } from '../../service/api.service';
 import { IGame } from '../../interfaces/IGame';
 import { FormAddGameComponent } from "../../components/form-add-game/form-add-game.component";
@@ -21,7 +21,7 @@ export class CategoryComponent {
   games: IGame[] = []
   modal: boolean = false
   modalService = inject(ModalServiceService);
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.categoryID = this.route.snapshot.params['id']
@@ -32,6 +32,10 @@ export class CategoryComponent {
     this.modalService.modalState$.subscribe(state => {
       this.modal = state;
     });
+    const logado = this.ApiService.getData('logado')
+    if (!logado) {
+      this.router.navigate(['/'])
+    }
   }
 
   toggleModal() {

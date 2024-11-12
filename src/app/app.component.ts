@@ -22,7 +22,6 @@ export class AppComponent {
       event => {
         if (event instanceof NavigationEnd) {
           this.urlAtual = event.url;
-          console.log(this.urlAtual);
 
           if (this.urlAtual === '/signup') {
             this.renderer.addClass(background, 'signup');

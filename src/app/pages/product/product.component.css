@@ -163,7 +163,7 @@
     flex-direction: column;
     height: 80%;
     width: 1440px;
-    top: 150px;
+    padding-top: 150px;
     backdrop-filter: blur(10px);
     gap: 1rem;
 }

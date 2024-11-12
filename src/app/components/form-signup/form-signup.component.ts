@@ -37,13 +37,16 @@ export class FormSignupComponent {
       email: this.formSignUp.get('email')?.value,
       password: this.formSignUp.get('password')?.value
     }
-    try {
+    if (this.formSignUp.valid) {
       this.ApiService.postUsers('users', newUser)
       this.router.navigate(['/'])
-    } catch (err) {
-      console.log(err);
-
+    } else {
+      alert('Preencha todos os campos')
+      this.isLoading = false
     }
+
+
+
 
 
   }

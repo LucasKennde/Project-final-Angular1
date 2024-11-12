@@ -19,10 +19,10 @@ export class ApiService {
   getData(key: string) {
     if (this.isLocalStorageAvailable()) {
       const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : [];
+      return data ? JSON.parse(data) : false;
     } else {
       console.warn('localStorage não está disponível.');
-      return [];
+      return false;
     }
   }
   postData(key: string, object: any) {
@@ -35,7 +35,7 @@ export class ApiService {
 
   postUsers(key: string, object: any) {
     if (this.isLocalStorageAvailable()) {
-      const users = this.getData(key);
+      const users = this.getData(key) || [];
       users.push(object);
       localStorage.setItem(key, JSON.stringify(users));
     } else {
@@ -100,5 +100,12 @@ export class ApiService {
   }
   isLoggedIn(): boolean {
     return this.isLocalStorageAvailable() && !!localStorage.getItem('logado');
+  }
+  logout() {
+    if (this.isLocalStorageAvailable()) {
+      localStorage.removeItem('logado')
+    } else {
+      console.warn('localStorage não está disponível.');
+    }
   }
 }

@@ -30,6 +30,11 @@ export class ProductComponent {
     this.categoryId = this.route.snapshot.params['category']
     const dataGame = this.ApiService.findGameByGameId(+this.gameId)
     this.game = dataGame
+
+    const logado = this.ApiService.getData('logado')
+    if (!logado) {
+      this.router.navigate(['/'])
+    }
   }
 
   deleteProduct(id: number) {

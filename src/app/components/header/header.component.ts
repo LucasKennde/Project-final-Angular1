@@ -11,4 +11,10 @@ import { ApiService } from '../../service/api.service';
 })
 export class HeaderComponent {
 
+  ApiService = inject(ApiService)
+  constructor(private router: Router) { }
+  Logout() {
+    this.ApiService.logout()
+    this.router.navigate(['/'])
+  }
 }
